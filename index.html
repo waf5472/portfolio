@@ -169,6 +169,15 @@
       <div class="container">
         <div class="section-card">
         <h2 class="section-heading">Projects</h2>
+
+        <!-- Live web apps: cards built at runtime from each deployment's
+             /project.json (see projects.js + PROJECT_SCHEMA.md). Undeployed
+             apps 404 and are skipped, so this shows only what's actually live. -->
+        <div class="live-projects" id="live-projects" hidden>
+          <h3 class="subsection-heading">Live web apps</h3>
+          <div class="projects-grid" id="live-projects-grid"></div>
+        </div>
+
         <div class="projects-grid">
 
           <article class="project-card project-card--featured">
@@ -304,6 +313,7 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="projects.js" defer></script>
   <script>
     (function() {
       var u = 'waf5472', d = 'outlook', t = 'com';

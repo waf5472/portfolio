@@ -324,6 +324,37 @@ ul, ol { list-style: none; }
   padding: .2rem .55rem;
 }
 
+/* Live web-app cards (runtime-generated from each deployment's /project.json) */
+.subsection-heading {
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-2);
+  margin-bottom: 1rem;
+}
+
+.live-projects { margin-bottom: 2.5rem; }
+
+.project-card--live { border-color: var(--accent-tint); }
+.project-card--live:hover { border-color: var(--accent); }
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-top: .25rem;
+}
+
+.project-link {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.project-link:hover { color: var(--accent-hover); }
+.project-link--muted { color: var(--text-3); font-weight: 500; }
+.project-link--muted:hover { color: var(--text-2); }
+
 /* ── Skills ─────────────────────────────────────────────────── */
 
 .skills-grid {
