@@ -17,7 +17,8 @@ ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"          # ~/Workspaces/projects
 PORTFOLIO="$SCRIPT_DIR"
 DAILY="$ROOT/daily-quiz"
 JOBS="$ROOT/jobs-map"
-DEV_ENDPOINTS_FILE="$PORTFOLIO/dev-endpoints.json"
+SITE_DIR="$PORTFOLIO/public"                  # the deployed static site
+DEV_ENDPOINTS_FILE="$SITE_DIR/dev-endpoints.json"
 
 pids=()
 
@@ -82,7 +83,7 @@ echo "▶ jobs-worker        → http://localhost:$PORT_JOBS    (/project.json +
 pids+=($!)
 
 echo "▶ portfolio (static) → http://localhost:$PORT_PORTFOLIO"
-( cd "$PORTFOLIO" && exec python3 -m http.server "$PORT_PORTFOLIO" ) >/tmp/preview-portfolio.log 2>&1 &
+( cd "$SITE_DIR" && exec python3 -m http.server "$PORT_PORTFOLIO" ) >/tmp/preview-portfolio.log 2>&1 &
 pids+=($!)
 
 # --- wait for the schema endpoints (workers take a few seconds to boot) ---
