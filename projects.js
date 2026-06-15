@@ -6,14 +6,41 @@
 // We probe every endpoint below; each one that responds becomes a card.
 // Apps that aren't deployed (or aren't ready) 404 and are silently skipped,
 // so the portfolio shows only what is actually live. To add a project,
-// serve /project.json from its deployment and add its base URL here — no
-// other edits to the portfolio are needed.
+// serve /project.json from its deployment and add its base URL here.
 
-const PROJECT_ENDPOINTS = [
-  // Base origin that serves /project.json. Fill in after each app deploys, e.g.:
+// Production: base origins that serve /project.json. Fill in after each app
+// deploys, e.g. "https://daily-quiz.<your-subdomain>.workers.dev".
+const PROD_ENDPOINTS = [
   // "https://daily-quiz.<your-subdomain>.workers.dev",
   // "https://jobs-worker.<your-subdomain>.workers.dev",
 ];
+
+// Local full-fidelity preview (started by preview.sh): probe the Workers
+// running on localhost. Only used when the page itself is served from localhost.
+// The launcher claims free ports and writes the actual ones to dev-endpoints.json;
+// these are just the fallback if that file isn't present.
+const DEV_ENDPOINTS = [
+  "http://localhost:8787", // daily-quiz worker
+  "http://localhost:8788", // jobs-worker
+];
+
+const DEV = ["localhost", "127.0.0.1"].includes(location.hostname);
+
+// In local mode, prefer the ports preview.sh actually chose (dev-endpoints.json,
+// same-origin & gitignored); fall back to the defaults above.
+async function resolveEndpoints() {
+  if (!DEV) return PROD_ENDPOINTS;
+  try {
+    const r = await fetch("dev-endpoints.json", { cache: "no-store" });
+    if (r.ok) {
+      const list = await r.json();
+      if (Array.isArray(list) && list.length) return list;
+    }
+  } catch {
+    /* no launcher file — use defaults */
+  }
+  return DEV_ENDPOINTS;
+}
 
 const grid = document.getElementById("live-projects-grid");
 const wrap = document.getElementById("live-projects");
@@ -53,20 +80,25 @@ function card({ name, description, link, repo, tags }) {
 }
 
 async function fetchSchema(base) {
-  const url = base.replace(/\/$/, "") + "/project.json";
-  const res = await fetch(url, { mode: "cors" });
-  if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
+  const origin = base.replace(/\/$/, "");
+  const res = await fetch(origin + "/project.json", { mode: "cors" });
+  if (!res.ok) throw new Error(`${origin}: HTTP ${res.status}`);
   const data = await res.json();
   if (!data || !data.name || !data.link) {
-    throw new Error(`${url}: missing required name/link`);
+    throw new Error(`${origin}: missing required name/link`);
   }
-  return data;
+  // In local preview the production `link` is a placeholder — point "Open app"
+  // at the live local origin instead so click-through works.
+  return DEV ? { ...data, link: origin } : data;
 }
 
 async function loadProjects() {
-  if (!grid || !wrap || !PROJECT_ENDPOINTS.length) return;
+  if (!grid || !wrap) return;
 
-  const results = await Promise.allSettled(PROJECT_ENDPOINTS.map(fetchSchema));
+  const endpoints = await resolveEndpoints();
+  if (!endpoints.length) return;
+
+  const results = await Promise.allSettled(endpoints.map(fetchSchema));
   const found = results
     .filter((r) => r.status === "fulfilled")
     .map((r) => r.value);
