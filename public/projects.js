@@ -12,7 +12,7 @@
 // deploys, e.g. "https://daily-quiz.<your-subdomain>.workers.dev".
 const PROD_ENDPOINTS = [
   "https://daily-quiz.wesley-fletcher.com",
-  // "https://jobs-map.wesley-fletcher.com",  // add after jobs-map deploys
+  "https://jobs-map.wesley-fletcher.com",
 ];
 
 // Local full-fidelity preview (started by preview.sh): probe the Workers
