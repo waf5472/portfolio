@@ -11,8 +11,8 @@
 // Production: base origins that serve /project.json. Fill in after each app
 // deploys, e.g. "https://daily-quiz.<your-subdomain>.workers.dev".
 const PROD_ENDPOINTS = [
-  "https://daily-quiz.waf5472.workers.dev",
-  // "https://jobs-worker.<your-subdomain>.workers.dev",  // add after jobs-map deploys
+  "https://daily-quiz.wesley-fletcher.com",
+  // "https://jobs-map.wesley-fletcher.com",  // add after jobs-map deploys
 ];
 
 // Local full-fidelity preview (started by preview.sh): probe the Workers
