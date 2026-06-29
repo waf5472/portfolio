@@ -383,6 +383,53 @@ ul, ol { list-style: none; }
   color: var(--text-2);
 }
 
+/* ── Education ──────────────────────────────────────────────── */
+
+.edu-group { margin-bottom: 2.25rem; }
+.edu-group:last-child { margin-bottom: 0; }
+
+.edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+
+.edu-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.edu-title {
+  font-size: .95rem;
+  color: var(--text);
+}
+
+.edu-org {
+  color: var(--text-2);
+}
+
+.edu-date {
+  font-size: .95rem;
+  color: var(--text-3);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* Size hierarchy: Formal (college) most prominent, then Leadership, then tech.
+   Dates match their line's content text size. */
+.edu-group--formal .edu-title    { font-size: 1.3rem; font-weight: 600; }
+.edu-group--formal .edu-date     { font-size: 1.3rem; }
+
+.edu-group--leadership .edu-title { font-size: 1.05rem; }
+.edu-group--leadership .edu-date  { font-size: 1.05rem; }
+
+.edu-group--tech .edu-title       { font-size: .9rem; }
+.edu-group--tech .edu-date        { font-size: .9rem; }
+
 /* ── Experience ─────────────────────────────────────────────── */
 
 .timeline {
