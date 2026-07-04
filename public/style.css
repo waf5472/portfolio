@@ -18,10 +18,10 @@
 
   /* Brand — sage → forest spectrum */
   --brand-sage:   #a7c48a;
-  --accent:       #7cb05f;
-  --accent-hover: #93c775;
-  --accent-deep:  #43713c;
-  --accent-tint:  rgba(124, 176, 95, 0.10);
+  --accent:       #43713c;
+  --accent-hover: #52874a;
+  --accent-deep:  #2f5229;
+  --accent-tint:  rgba(67, 113, 60, 0.16);
 
   /* Semantic indicators */
   --info:    #3f7bad;
@@ -138,10 +138,10 @@ ul, ol { list-style: none; }
 .btn-primary {
   background: var(--accent);
   border-color: var(--accent);
-  color: #04120d;
+  color: #e9ecef;
   font-weight: 600;
 }
-.btn-primary:hover  { background: var(--accent-hover); border-color: var(--accent-hover); color: #04120d; }
+.btn-primary:hover  { background: var(--accent-hover); border-color: var(--accent-hover); color: #e9ecef; }
 .btn-primary:active { background: var(--accent-deep); border-color: var(--accent-deep); }
 
 .btn-secondary {
