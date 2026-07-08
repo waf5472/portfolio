@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Terrafirma — a habitat-suitability platform that fuses public geospatial data into species suitability maps and ecological interaction graphs, built on a clean two-layer architecture." />
+  <title>Terrafirma — Wesley Fletcher</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../case.css" />
+</head>
+<body>
+
+  <header class="nav-wrapper" id="nav">
+    <nav class="nav container">
+      <a href="../index.html#hero" class="nav-logo">Wesley Fletcher</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#projects">Work</a></li>
+        <li><a href="../index.html#experience">Experience</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="cs-hero reveal">
+      <div class="container">
+        <a class="cs-back" href="../index.html#projects">&larr; All work</a>
+        <p class="cs-eyebrow">Systems &amp; Robotics</p>
+        <h1 class="cs-title">Terrafirma</h1>
+        <p class="cs-tagline">Point it at a patch of land and get species-suitability maps — fused from real public geoscience data.</p>
+        <div class="cs-meta">
+          <span class="chip"><b>Domain</b> Geospatial / ecology</span>
+          <span class="chip"><b>Stack</b> Python · PostGIS · scikit-learn</span>
+          <span class="chip"><b>Role</b> Solo architect &amp; builder</span>
+          <span class="chip"><b>Started</b> Mar 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Summary</h2>
+          <p class="cs-lede">
+            Terrafirma models where a given species is likely to thrive. It ingests soil, terrain, climate,
+            land-cover, and occurrence data from a stack of public sources, scores habitat suitability across
+            the landscape, and renders the result as map tiles alongside an <b>ecological interaction graph</b>
+            of the species around it.
+          </p>
+          <p class="cs-lede">
+            Its defining feature is architectural: a strict <b>two-layer split</b> between a species-agnostic
+            <em>data plane</em> and a species-specific <em>inference</em> layer. That seam keeps the geoscience
+            reusable across any species and the modelling logic honest and independently testable.
+          </p>
+
+          <div class="status">
+            <div class="status-top">
+              <span class="status-badge status-badge--wip">Work in progress</span>
+              <span class="status-phase">Engine complete &amp; tested · end-to-end integration in progress</span>
+            </div>
+            <div class="status-bar"><div class="status-fill status-fill--wip" style="width:70%"></div></div>
+            <div class="status-lines">
+              <div class="status-line"><b>Shipped</b><span>The YAML-driven suitability engine, map-tile rendering, a web UI, and a 484-test suite.</span></div>
+              <div class="status-line"><b>Now</b><span>Wiring the data-verification gate into the pipeline and proving the two layers end-to-end.</span></div>
+              <div class="status-line"><b>Next</b><span>Run the full pipeline on live regional data (beyond the pilot bounding box) and validate outputs.</span></div>
+            </div>
+            <div class="stat-strip">
+              <div class="stat"><b>484</b><span>passing tests</span></div>
+              <div class="stat"><b>7+</b><span>public data sources</span></div>
+              <div class="stat"><b>2-layer</b><span>data / inference split</span></div>
+              <div class="stat"><b>YAML</b><span>per-species config</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">The idea, in pictures</h2>
+          <div class="figures">
+
+            <!-- Two-layer architecture -->
+            <figure class="diagram">
+              <svg viewBox="0 0 800 360" role="img" aria-label="Terrafirma two-layer architecture: a species-agnostic data plane feeding a species-specific inference layer">
+                <defs>
+                  <marker id="atf" markerWidth="9" markerHeight="9" refX="4.5" refY="7" orient="auto">
+                    <path d="M4.5 0 L9 7 L0 7 Z" fill="#7cb05f"/>
+                  </marker>
+                </defs>
+
+                <!-- Output -->
+                <rect x="250" y="14" width="300" height="42" rx="10" fill="#0b0f13" stroke="#43713c"/>
+                <text x="400" y="40" text-anchor="middle" fill="#7cb05f" font-size="13" font-weight="600">Suitability map tiles + interaction graph</text>
+
+                <!-- Layer 2 -->
+                <rect x="36" y="80" width="728" height="118" rx="12" fill="#0d141a" stroke="#3a4a54"/>
+                <text x="52" y="102" fill="#8b949e" font-size="10.5" font-weight="700" letter-spacing="1.5">LAYER 2 · SPECIES INFERENCE</text>
+                <g font-size="11.5" fill="#e9ecef" text-anchor="middle">
+                  <rect x="52"  y="112" width="128" height="34" rx="7" fill="#0b0f13" stroke="#2a3138"/><text x="116" y="133">Terrain</text>
+                  <rect x="196" y="112" width="128" height="34" rx="7" fill="#0b0f13" stroke="#2a3138"/><text x="260" y="133">Canopy</text>
+                  <rect x="340" y="112" width="128" height="34" rx="7" fill="#0b0f13" stroke="#2a3138"/><text x="404" y="133">Host density</text>
+                  <rect x="484" y="112" width="128" height="34" rx="7" fill="#0b0f13" stroke="#2a3138"/><text x="548" y="133">Phenology</text>
+                  <rect x="628" y="112" width="128" height="34" rx="7" fill="#0b0f13" stroke="#2a3138"/><text x="692" y="133">SDM (RF)</text>
+                </g>
+                <rect x="270" y="158" width="260" height="30" rx="7" fill="#0b0f13" stroke="#43713c"/>
+                <text x="400" y="178" text-anchor="middle" fill="#7cb05f" font-size="11.5" font-weight="600">log-space geometric-mean combiner</text>
+
+                <!-- one-way arrow -->
+                <line x1="400" y1="248" x2="400" y2="204" stroke="#7cb05f" stroke-width="1.6" marker-end="url(#atf)"/>
+                <text x="414" y="230" fill="#8b949e" font-size="10">Layer 2 reads Layer 1 &mdash; never the reverse</text>
+
+                <!-- Layer 1 -->
+                <rect x="36" y="252" width="728" height="62" rx="12" fill="#0d141a" stroke="#3a4a54"/>
+                <text x="52" y="272" fill="#8b949e" font-size="10.5" font-weight="700" letter-spacing="1.5">LAYER 1 · SPECIES-AGNOSTIC DATA PLANE</text>
+                <g font-size="10.5" fill="#e9ecef" text-anchor="middle">
+                  <rect x="52"  y="280" width="108" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="106" y="297">slope</text>
+                  <rect x="170" y="280" width="108" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="224" y="297">aspect</text>
+                  <rect x="288" y="280" width="108" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="342" y="297">elevation</text>
+                  <rect x="406" y="280" width="108" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="460" y="297">TPI</text>
+                  <rect x="524" y="280" width="108" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="578" y="297">land cover</text>
+                  <rect x="642" y="280" width="114" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="699" y="297">host points</text>
+                </g>
+
+                <!-- Sources -->
+                <text x="400" y="336" text-anchor="middle" fill="#5c656e" font-size="10.5">
+                  sources: iNaturalist · SSURGO · USGS 3DEP · PRISM · GLOBI · GBIF · Mushroom Observer
+                </text>
+              </svg>
+              <figcaption>
+                <b>One seam, cleanly enforced.</b> Layer 1 serves typed, species-agnostic geodata; Layer 2
+                scores a specific species and fuses the scores. The dependency only ever points downward, so
+                adding a species never touches the data plane.
+              </figcaption>
+            </figure>
+
+            <!-- Map UI placeholder -->
+            <figure class="shot shot--ph">
+              <div class="shot-ph">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span class="ph-label">Screenshot to add</span>
+                <code>assets/terrafirma-map.png</code>
+              </div>
+              <!-- To use, replace the .shot-ph div above with:
+                   <img src="assets/terrafirma-map.png" alt="Terrafirma web map with a suitability heatmap overlay"> -->
+              <figcaption>
+                <b>Suitability, rendered as map tiles.</b> The web UI overlays per-species suitability as
+                colour-graded tiles computed on demand, so you can pan a landscape and read where a species is
+                likely to occur.
+              </figcaption>
+            </figure>
+
+            <!-- Config placeholder -->
+            <figure class="shot shot--ph">
+              <div class="shot-ph">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 4h16v16H4z"/><path d="M8 9h5M8 13h8M8 17h6"/></svg>
+                <span class="ph-label">Screenshot to add</span>
+                <code>assets/terrafirma-config.png</code>
+              </div>
+              <!-- To use, replace the .shot-ph div above with:
+                   <img src="assets/terrafirma-config.png" alt="A species suitability YAML configuration file"> -->
+              <figcaption>
+                <b>Every species is a config, not code.</b> Terrain bands, host trees, phenology windows, and
+                model weights are declared in a YAML file; each scoring component toggles on or off without
+                touching the engine.
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Engineering highlights</h2>
+          <div class="highlights">
+            <div class="highlight">
+              <h4>Two-layer architecture</h4>
+              <p>A species-agnostic data plane and a species-inference layer, joined by a one-way dependency
+                 verified by sweep — the reusable core stays clean as species accumulate.</p>
+            </div>
+            <div class="highlight">
+              <h4>Real geoscience, integrated</h4>
+              <p>Seven-plus public sources — iNaturalist, SSURGO soils, USGS 3DEP elevation, PRISM climate,
+                 GLOBI interactions, GBIF, Mushroom Observer — normalised into typed providers.</p>
+            </div>
+            <div class="highlight">
+              <h4>Declarative, per-species configs</h4>
+              <p>A single parser validates the whole species file; components are enable/disable-able by one
+                 YAML flag, so behaviour is data, not branching code.</p>
+            </div>
+            <div class="highlight">
+              <h4>Real modelling under the hood</h4>
+              <p>A per-species RandomForest species-distribution model with pseudo-absence sampling, plus a
+                 NetworkX ecological interaction graph built from GLOBI.</p>
+            </div>
+            <div class="highlight">
+              <h4>484 tests &amp; a "verify data first" gate</h4>
+              <p>The suitability engine went from zero to 484 tests; a data-verification job checks that raster
+                 layers are present and physically plausible before anything scores.</p>
+            </div>
+            <div class="highlight">
+              <h4>Documentation that resists rot</h4>
+              <p>A single source-of-truth codebase map, layered by volatility (stable intent vs. dated current
+                 state) — with an honest, dated verification readout rather than aspirational claims.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Stack &amp; access</h2>
+          <div class="cs-meta" style="margin-bottom:1.2rem">
+            <span class="chip">Python</span>
+            <span class="chip">FastAPI</span>
+            <span class="chip">PostGIS</span>
+            <span class="chip">scikit-learn</span>
+            <span class="chip">rio-tiler</span>
+            <span class="chip">NetworkX</span>
+            <span class="chip">Leaflet</span>
+            <span class="chip">Docker</span>
+          </div>
+          <div class="cs-note">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>Source is private to protect the design. I'm happy to walk through the architecture or the
+              modelling approach in a conversation &mdash; just <a href="../index.html#contact">reach out</a>.</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Wesley Fletcher · <a href="../index.html#projects">Back to work &#8599;</a></p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

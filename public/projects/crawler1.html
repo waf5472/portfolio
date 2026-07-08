@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Crawler1 — a compact ROS2/Arduino skid-steer robotics platform and autonomy testbed, bootstrapped from Forager1's proven core with a tracked provenance ledger." />
+  <title>Crawler1 — Wesley Fletcher</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../case.css" />
+</head>
+<body>
+
+  <header class="nav-wrapper" id="nav">
+    <nav class="nav container">
+      <a href="../index.html#hero" class="nav-logo">Wesley Fletcher</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#projects">Work</a></li>
+        <li><a href="../index.html#experience">Experience</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="cs-hero reveal">
+      <div class="container">
+        <a class="cs-back" href="../index.html#projects">&larr; All work</a>
+        <p class="cs-eyebrow">Systems &amp; Robotics</p>
+        <h1 class="cs-title">Crawler1</h1>
+        <p class="cs-tagline">A compact skid-steer robotics platform — and an autonomy testbed built on a proven core.</p>
+        <div class="cs-meta">
+          <span class="chip"><b>Domain</b> Field robotics</span>
+          <span class="chip"><b>Stack</b> ROS2 · Arduino · Gazebo</span>
+          <span class="chip"><b>Role</b> Solo architect &amp; builder</span>
+          <span class="chip"><b>Started</b> Jun 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Summary</h2>
+          <p class="cs-lede">
+            Crawler1 is a small ROS2/Arduino skid-steer robot with two jobs: <b>local autonomous
+            path-following</b> as the primary mode, and <b>long-range teleoperated photo capture</b> as the
+            secondary. It doubles as a low-stakes testbed for autonomy work that later benefits the larger
+            Forager1 robot.
+          </p>
+          <p class="cs-lede">
+            What makes a days-old project already credible is <b>disciplined reuse</b>: it was bootstrapped
+            from Forager1's proven navigation and simulation core, with a provenance ledger recording exactly
+            what was adapted and from which commit.
+          </p>
+
+          <div class="status">
+            <div class="status-top">
+              <span class="status-badge status-badge--young">Young — just kicked off</span>
+              <span class="status-phase">Infra + simulation stood up · on-hardware drive loop next</span>
+            </div>
+            <div class="status-bar"><div class="status-fill status-fill--young" style="width:18%"></div></div>
+            <div class="status-lines">
+              <div class="status-line"><b>Shipped</b><span>Forager1-style workspace, a two-mode v0.2 spec + BOM, and a Gazebo Harmonic skid-steer simulation.</span></div>
+              <div class="status-line"><b>Now</b><span>Bringing up the drive path and localization on real hardware (sim can't cross the sandbox boundary).</span></div>
+              <div class="status-line"><b>Next</b><span>A dependency-ordered roadmap of 25 tasks toward a v2 EKF + planner milestone (Nov 2026).</span></div>
+            </div>
+            <div class="stat-strip">
+              <div class="stat"><b>2 modes</b><span>autonomy + capture</span></div>
+              <div class="stat"><b>25</b><span>scheduled tasks</span></div>
+              <div class="stat"><b>Nov '26</b><span>milestone target</span></div>
+              <div class="stat"><b>ledger</b><span>tracked reuse</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">The idea, in pictures</h2>
+          <div class="figures">
+
+            <!-- Two-mode + reuse diagram -->
+            <figure class="diagram">
+              <svg viewBox="0 0 800 280" role="img" aria-label="Crawler1's two operating modes on a portable core adapted from Forager1">
+                <defs>
+                  <marker id="acr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                    <path d="M0 0 L6 3 L0 6 Z" fill="#5c656e"/>
+                  </marker>
+                </defs>
+
+                <!-- Modes -->
+                <rect x="70" y="24" width="290" height="72" rx="12" fill="#0d141a" stroke="#43713c"/>
+                <text x="215" y="50" text-anchor="middle" fill="#7cb05f" font-size="13" font-weight="700">Mode B · local autonomy</text>
+                <text x="215" y="72" text-anchor="middle" fill="#8b949e" font-size="11">autonomous path-following &nbsp;·&nbsp; primary</text>
+
+                <rect x="440" y="24" width="290" height="72" rx="12" fill="#0d141a" stroke="#3a4a54"/>
+                <text x="585" y="50" text-anchor="middle" fill="#e9ecef" font-size="13" font-weight="600">Mode A · teleop capture</text>
+                <text x="585" y="72" text-anchor="middle" fill="#8b949e" font-size="11">long-range photo collection &nbsp;·&nbsp; secondary</text>
+
+                <!-- Platform -->
+                <rect x="180" y="130" width="440" height="58" rx="12" fill="#0b0f13" stroke="#3a4a54"/>
+                <text x="400" y="156" text-anchor="middle" fill="#e9ecef" font-size="13" font-weight="600">Crawler1 platform</text>
+                <text x="400" y="176" text-anchor="middle" fill="#8b949e" font-size="11">ROS2 · Arduino · twist-mux · Bluetooth mission-state</text>
+
+                <!-- Portable core -->
+                <rect x="180" y="214" width="440" height="52" rx="12" fill="#0b0f13" stroke="#2a3138"/>
+                <text x="400" y="238" text-anchor="middle" fill="#8b949e" font-size="11.5">Portable core — EKF · sim · nav scaffolding</text>
+                <text x="400" y="256" text-anchor="middle" fill="#5c656e" font-size="10">adapted from Forager1 · logged in PORTABLE.md</text>
+
+                <!-- arrows -->
+                <line x1="215" y1="130" x2="215" y2="100" stroke="#5c656e" stroke-width="1.5" marker-end="url(#acr)"/>
+                <line x1="585" y1="130" x2="585" y2="100" stroke="#5c656e" stroke-width="1.5" marker-end="url(#acr)"/>
+                <line x1="400" y1="214" x2="400" y2="192" stroke="#5c656e" stroke-width="1.5" marker-end="url(#acr)"/>
+              </svg>
+              <figcaption>
+                <b>Two modes on a reused core.</b> Autonomy is the priority; teleop capture rides along. Both
+                sit on a portable core lifted from Forager1 — with a provenance ledger noting each adapted
+                file and its source commit, so the lineage is never guesswork.
+              </figcaption>
+            </figure>
+
+            <!-- Sim placeholder -->
+            <figure class="shot shot--ph">
+              <div class="shot-ph">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span class="ph-label">Screenshot to add</span>
+                <code>assets/crawler1-sim.png</code>
+              </div>
+              <!-- To use, replace the .shot-ph div above with:
+                   <img src="assets/crawler1-sim.png" alt="Crawler1 skid-steer model in the Gazebo Harmonic simulation"> -->
+              <figcaption>
+                <b>Simulation before silicon.</b> A shoebox skid-steer model runs in Gazebo Harmonic with a
+                diff-drive plugin, IMU, and an optional camera — with a headless, no-GPU world so the drive
+                path can be exercised anywhere.
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Engineering highlights</h2>
+          <div class="highlights">
+            <div class="highlight">
+              <h4>Provenance-tracked reuse</h4>
+              <p>A <code>PORTABLE.md</code> ledger records every file adapted from Forager1 and the commit it
+                 came from — reuse with an audit trail, not copy-paste.</p>
+            </div>
+            <div class="highlight">
+              <h4>Simulation-first</h4>
+              <p>A Gazebo Harmonic world (full and headless/no-render variants) lets the drive loop and bridge
+                 be validated before hardware exists.</p>
+            </div>
+            <div class="highlight">
+              <h4>Planned before built</h4>
+              <p>A v0.2 System Requirements doc and BOM, plus 25 dependency-ordered tasks dated to a Nov-2026
+                 milestone and synced to a calendar — maturity uncommon for a project this young.</p>
+            </div>
+            <div class="highlight">
+              <h4>Consistent platform conventions</h4>
+              <p>The ROS2 workspace mirrors Forager1's layout (colcon root, twist-mux, launch structure) so
+                 lessons and tooling transfer directly between the two robots.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Stack &amp; access</h2>
+          <div class="cs-meta" style="margin-bottom:1.2rem">
+            <span class="chip">ROS2</span>
+            <span class="chip">Arduino</span>
+            <span class="chip">Gazebo Harmonic</span>
+            <span class="chip">Python</span>
+            <span class="chip">twist-mux</span>
+            <span class="chip">EKF</span>
+          </div>
+          <div class="cs-note">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>Source is private to protect the design. I'm happy to walk through the platform or its
+              relationship to Forager1 in a conversation &mdash; just <a href="../index.html#contact">reach out</a>.</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Wesley Fletcher · <a href="../index.html#projects">Back to work &#8599;</a></p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

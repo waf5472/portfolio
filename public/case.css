@@ -1,0 +1,258 @@
+/* ═══════════════════════════════════════════════════════════════
+   Case-study subpages — builds on style.css tokens.
+   Loaded only by /projects/*.html.
+═══════════════════════════════════════════════════════════════ */
+
+/* Shared semantic status hues (mirrors the Console palette) */
+:root {
+  --info:   #5b87ab;   /* steel  — young / just started   */
+  --warn:   #c07f43;   /* amber  — active build           */
+  --sage:   #7cb05f;   /* sage   — almost done            */
+  --forest: #43713c;   /* forest — done                   */
+}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.cs-hero {
+  padding-top: calc(var(--nav-h) + 2.75rem);
+  padding-bottom: 1.25rem;
+}
+
+.cs-back {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .85rem;
+  color: var(--text-2);
+  margin-bottom: 1.5rem;
+}
+.cs-back:hover { color: var(--text); }
+
+.cs-eyebrow {
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .8rem;
+}
+
+.cs-title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin-bottom: .65rem;
+}
+
+.cs-tagline {
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  color: var(--text-2);
+  max-width: 660px;
+  margin-bottom: 1.6rem;
+}
+
+.cs-meta { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+.chip {
+  font-size: .78rem;
+  color: var(--text-2);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: .28rem .7rem;
+}
+.chip b { color: var(--text-3); font-weight: 500; margin-right: .35rem; }
+
+/* ── Content blocks ──────────────────────────────────────────── */
+.cs-block + .cs-block { margin-top: 1.5rem; }
+
+.cs-h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+}
+
+.cs-lede {
+  color: var(--text-2);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  max-width: 700px;
+}
+.cs-lede + .cs-lede { margin-top: .9rem; }
+.cs-lede b { color: var(--text); font-weight: 600; }
+
+/* ── Status block ────────────────────────────────────────────── */
+.status {
+  margin-top: 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+}
+
+.status-top {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  padding: .28rem .72rem;
+  border-radius: 980px;
+  border: 1px solid transparent;
+}
+.status-badge--young  { color: var(--info);   background: rgba(91,135,171,.14); border-color: rgba(91,135,171,.32); }
+.status-badge--wip    { color: var(--warn);   background: rgba(192,127,67,.14); border-color: rgba(192,127,67,.32); }
+.status-badge--almost { color: var(--sage);   background: rgba(124,176,95,.14); border-color: rgba(124,176,95,.32); }
+.status-badge--done   { color: var(--sage);   background: rgba(67,113,60,.20);  border-color: rgba(67,113,60,.40); }
+
+.status-phase { font-size: .85rem; color: var(--text-2); }
+
+.status-bar {
+  height: 6px;
+  border-radius: 980px;
+  background: rgba(255,255,255,.07);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+.status-fill { height: 100%; border-radius: 980px; }
+.status-fill--young  { background: var(--info); }
+.status-fill--wip    { background: var(--warn); }
+.status-fill--almost { background: var(--sage); }
+.status-fill--done   { background: var(--forest); }
+
+.status-lines { display: grid; gap: .55rem; }
+.status-line { display: flex; gap: .8rem; font-size: .92rem; line-height: 1.5; }
+.status-line b {
+  flex-shrink: 0;
+  width: 64px;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding-top: .18rem;
+}
+.status-line span { color: var(--text-2); }
+
+.stat-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem 1.75rem;
+  margin-top: 1.3rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--border);
+}
+.stat { display: flex; flex-direction: column; }
+.stat b { font-size: 1.15rem; font-weight: 700; color: var(--text); letter-spacing: -.01em; }
+.stat span { font-size: .74rem; color: var(--text-3); }
+
+/* ── Figures ─────────────────────────────────────────────────── */
+.figures { display: grid; gap: 1.5rem; }
+
+.shot,
+.diagram {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.shot img { width: 100%; height: auto; display: block; }
+
+.shot figcaption,
+.diagram figcaption {
+  font-size: .88rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  padding: .95rem 1.15rem;
+}
+.shot figcaption b,
+.diagram figcaption b { color: var(--text); font-weight: 600; }
+
+/* Placeholder for screenshots/photos the owner will drop in */
+.shot--ph .shot-ph {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-3);
+  border-bottom: 1px dashed var(--border);
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.02) 0 12px, transparent 12px 24px);
+}
+.shot-ph svg { opacity: .4; }
+.shot-ph .ph-label { font-size: .8rem; }
+.shot-ph code {
+  font-size: .76rem;
+  color: var(--text-2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: .18rem .5rem;
+  border-radius: 6px;
+}
+
+/* Inline SVG diagrams */
+.diagram { padding: 1.5rem 1.5rem .25rem; }
+.diagram svg { width: 100%; height: auto; display: block; }
+.diagram figcaption { padding-inline: 0; }
+
+/* ── Engineering highlights ──────────────────────────────────── */
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+  gap: 1.1rem;
+}
+.highlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.4rem;
+}
+.highlight h4 {
+  font-size: .98rem;
+  font-weight: 600;
+  margin-bottom: .5rem;
+  display: flex;
+  gap: .55rem;
+  align-items: baseline;
+}
+.highlight h4::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--accent);
+  flex-shrink: 0;
+  transform: translateY(-1px);
+}
+.highlight p { font-size: .9rem; color: var(--text-2); line-height: 1.6; }
+
+/* ── Code-private note ───────────────────────────────────────── */
+.cs-note {
+  display: flex;
+  gap: .8rem;
+  align-items: flex-start;
+  font-size: .92rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  background: var(--accent-tint);
+  border: 1px solid rgba(67,113,60,.3);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+}
+.cs-note svg { flex-shrink: 0; color: var(--accent); margin-top: .15rem; }
+
+@media (max-width: 768px) {
+  .status-line b { width: 56px; }
+}

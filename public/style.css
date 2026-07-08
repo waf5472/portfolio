@@ -625,3 +625,52 @@ ul, ol { list-style: none; }
 @media (max-width: 380px) {
   .skills-grid  { grid-template-columns: 1fr; }
 }
+
+/* ── Systems & Robotics cards (link out to case-study pages) ──── */
+:root {
+  --info:   #5b87ab;   /* steel  — young          */
+  --warn:   #c07f43;   /* amber  — work in progress */
+  --sage:   #7cb05f;   /* sage   — almost done     */
+}
+
+a.project-card { color: inherit; }
+
+.project-card--sys {
+  cursor: pointer;
+  transition: border-color .3s var(--ease), transform .3s var(--ease);
+}
+.project-card--sys:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.project-card--sys .project-meta h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+}
+.sys-arrow {
+  color: var(--text-3);
+  font-size: .95rem;
+  transition: color .25s, transform .25s var(--ease);
+}
+.project-card--sys:hover .sys-arrow {
+  color: var(--accent);
+  transform: translate(2px, -2px);
+}
+
+.sys-foot { display: flex; flex-direction: column; gap: .75rem; margin-top: .1rem; }
+
+.sys-status {
+  align-self: flex-start;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  padding: .2rem .6rem;
+  border-radius: 980px;
+  border: 1px solid transparent;
+}
+.sys-status--young  { color: var(--info); background: rgba(91,135,171,.14);  border-color: rgba(91,135,171,.30); }
+.sys-status--wip    { color: var(--warn); background: rgba(192,127,67,.14);  border-color: rgba(192,127,67,.30); }
+.sys-status--almost { color: var(--sage); background: rgba(124,176,95,.14);  border-color: rgba(124,176,95,.30); }
