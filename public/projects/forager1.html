@@ -62,10 +62,18 @@
 
           <div class="status">
             <div class="status-top">
-              <span class="status-badge status-badge--wip">Work in progress</span>
+              <span class="status-badge status-badge--almost">Late stage</span>
               <span class="status-phase">Phase 2 of 3 · simulation-validated, hardware bring-up next</span>
             </div>
-            <div class="status-bar"><div class="status-fill status-fill--wip" style="width:62%"></div></div>
+            <div class="stage stage--late">
+              <div class="stage-label">Project status</div>
+              <div class="stage-track">
+                <div class="stage-step is-filled"><div class="stage-bar"></div><div class="stage-name">Early stage</div></div>
+                <div class="stage-step is-filled"><div class="stage-bar"></div><div class="stage-name">Work in progress</div></div>
+                <div class="stage-step is-filled is-current"><div class="stage-bar"></div><div class="stage-name">Late stage</div></div>
+                <div class="stage-step"><div class="stage-bar"></div><div class="stage-name">Done</div></div>
+              </div>
+            </div>
             <div class="status-lines">
               <div class="status-line"><b>Shipped</b><span>Full ROS2 nav &amp; safety stack, Phase-2 localization, Gazebo simulation, and a 298-test regression suite.</span></div>
               <div class="status-line"><b>Now</b><span>Operator-console bridge (Pathfinder) and firmware/Pi safety-contract hardening.</span></div>

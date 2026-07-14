@@ -153,6 +153,40 @@
 .stat b { font-size: 1.15rem; font-weight: 700; color: var(--text); letter-spacing: -.01em; }
 .stat span { font-size: .74rem; color: var(--text-3); }
 
+/* ── Project-status stage scale (Early → WIP → Late → Done) ───── */
+.stage { margin-bottom: 1.25rem; }
+.stage-label {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: .55rem;
+}
+.stage-track { display: flex; gap: .5rem; }
+.stage-step { flex: 1; min-width: 0; }
+.stage-bar {
+  height: 5px;
+  border-radius: 980px;
+  background: rgba(255,255,255,.08);
+}
+.stage-step.is-filled .stage-bar { background: var(--stage-hue); }
+.stage-name {
+  margin-top: .45rem;
+  font-size: .72rem;
+  color: var(--text-3);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.stage-step.is-current .stage-name { color: var(--stage-hue); font-weight: 700; }
+
+.stage--early { --stage-hue: var(--info); }
+.stage--wip   { --stage-hue: var(--warn); }
+.stage--late  { --stage-hue: var(--sage); }
+.stage--done  { --stage-hue: var(--forest); }
+
 /* ── Figures ─────────────────────────────────────────────────── */
 .figures { display: grid; gap: 1.5rem; }
 

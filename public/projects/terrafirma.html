@@ -61,10 +61,18 @@
 
           <div class="status">
             <div class="status-top">
-              <span class="status-badge status-badge--wip">Work in progress</span>
+              <span class="status-badge status-badge--almost">Late stage</span>
               <span class="status-phase">Engine complete &amp; tested · end-to-end integration in progress</span>
             </div>
-            <div class="status-bar"><div class="status-fill status-fill--wip" style="width:70%"></div></div>
+            <div class="stage stage--late">
+              <div class="stage-label">Project status</div>
+              <div class="stage-track">
+                <div class="stage-step is-filled"><div class="stage-bar"></div><div class="stage-name">Early stage</div></div>
+                <div class="stage-step is-filled"><div class="stage-bar"></div><div class="stage-name">Work in progress</div></div>
+                <div class="stage-step is-filled is-current"><div class="stage-bar"></div><div class="stage-name">Late stage</div></div>
+                <div class="stage-step"><div class="stage-bar"></div><div class="stage-name">Done</div></div>
+              </div>
+            </div>
             <div class="status-lines">
               <div class="status-line"><b>Shipped</b><span>The YAML-driven suitability engine, map-tile rendering, a web UI, and a 484-test suite.</span></div>
               <div class="status-line"><b>Now</b><span>Wiring the data-verification gate into the pipeline and proving the two layers end-to-end.</span></div>
