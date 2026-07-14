@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pathfinder — a React Native field-navigation app that turns a hand-drawn coverage area into a robot mission, built against a frozen interface contract with the Forager1 robot." />
+  <title>Pathfinder — Wesley Fletcher</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../case.css" />
+</head>
+<body>
+
+  <header class="nav-wrapper" id="nav">
+    <nav class="nav container">
+      <a href="../index.html#hero" class="nav-logo">Wesley Fletcher</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#projects">Work</a></li>
+        <li><a href="../index.html#experience">Experience</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="cs-hero reveal">
+      <div class="container">
+        <a class="cs-back" href="../index.html#projects">&larr; All work</a>
+        <p class="cs-eyebrow">Personal Project · Systems &amp; Robotics</p>
+        <h1 class="cs-title">Pathfinder</h1>
+        <p class="cs-tagline">Draw a field on your phone; hand the robot a mission.</p>
+        <div class="cs-meta">
+          <span class="chip"><b>Domain</b> Mobile / robotics ops</span>
+          <span class="chip"><b>Stack</b> React Native · Expo · Mapbox</span>
+          <span class="chip"><b>Role</b> Solo architect &amp; builder</span>
+          <span class="chip"><b>Started</b> Jun 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <!-- Summary -->
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Summary</h2>
+          <p class="cs-lede">
+            Pathfinder is the operator's console for the Forager1 robot: a React Native / Expo app where you
+            draw a field coverage area, mark exclusion zones and a home point on a map, and generate a
+            complete robot mission from it.
+          </p>
+          <p class="cs-lede">
+            The interesting engineering isn't the drawing UI — it's the <b>contract</b>. Before writing
+            delivery code, I read the Forager1 codebase at source level and froze the real interface it
+            expects, then designed Pathfinder to be <b>robot-agnostic</b>: supporting a second robot means
+            adding a profile, not forking the app.
+          </p>
+
+          <div class="status">
+            <div class="status-top">
+              <span class="status-badge status-badge--wip">Work in progress</span>
+              <span class="status-phase">Contract frozen · app scaffolded &amp; building · MVP surface ahead</span>
+            </div>
+            <div class="status-bar"><div class="status-fill status-fill--wip" style="width:42%"></div></div>
+            <div class="status-lines">
+              <div class="status-line"><b>Shipped</b><span>A verified robot-interface contract, the app bundle building on web + native, and the Console design system.</span></div>
+              <div class="status-line"><b>Now</b><span>Building the map draw &rarr; mission-export &rarr; file-delivery flow to the robot.</span></div>
+              <div class="status-line"><b>Next</b><span>Complete the MVP surface (~24 tasks / ~92 hrs planned) and field-test against Forager1.</span></div>
+            </div>
+            <div class="stat-strip">
+              <div class="stat"><b>24</b><span>tasks, DoD-scoped</span></div>
+              <div class="stat"><b>SP1&ndash;SP8</b><span>scale/perf budget</span></div>
+              <div class="stat"><b>2 robots</b><span>agnostic-by-design</span></div>
+              <div class="stat"><b>WGS-84</b><span>frozen coordinate frame</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The idea, in pictures -->
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Design &amp; system architecture</h2>
+          <div class="figures">
+
+            <!-- Contract flow (architecture) -->
+            <figure class="diagram">
+              <svg viewBox="0 0 800 250" role="img" aria-label="Pathfinder turns a drawn coverage area into a mission file contract that Forager1 ingests">
+                <defs>
+                  <marker id="apf" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                    <path d="M0 0 L6 3 L0 6 Z" fill="#5c656e"/>
+                  </marker>
+                </defs>
+
+                <!-- Pathfinder -->
+                <rect x="16" y="70" width="210" height="130" rx="12" fill="#0d141a" stroke="#3a4a54"/>
+                <text x="121" y="94" text-anchor="middle" fill="#e9ecef" font-size="13" font-weight="600">Pathfinder app</text>
+                <g font-size="11" fill="#e9ecef" text-anchor="middle">
+                  <rect x="32" y="106" width="178" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="121" y="123">draw coverage area</text>
+                  <rect x="32" y="138" width="178" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="121" y="155">exclusion zones</text>
+                  <rect x="32" y="170" width="178" height="22" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="121" y="185">home point</text>
+                </g>
+
+                <!-- Artifact / contract -->
+                <rect x="286" y="82" width="228" height="106" rx="12" fill="#0b0f13" stroke="#43713c"/>
+                <text x="400" y="106" text-anchor="middle" fill="#7cb05f" font-size="12" font-weight="700" letter-spacing=".5">FROZEN CONTRACT</text>
+                <text x="400" y="132" text-anchor="middle" fill="#e9ecef" font-size="12">mission.json</text>
+                <text x="400" y="152" text-anchor="middle" fill="#e9ecef" font-size="12">site.geojson</text>
+                <text x="400" y="174" text-anchor="middle" fill="#8b949e" font-size="10.5">WGS-84 lat/lon</text>
+
+                <!-- Forager1 -->
+                <rect x="574" y="70" width="210" height="130" rx="12" fill="#0d141a" stroke="#3a4a54"/>
+                <text x="679" y="94" text-anchor="middle" fill="#e9ecef" font-size="13" font-weight="600">Forager1</text>
+                <g font-size="11" fill="#e9ecef" text-anchor="middle">
+                  <rect x="590" y="106" width="178" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="679" y="123">ros2 launch (files)</text>
+                  <rect x="590" y="138" width="178" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="679" y="155">project to local ENU</text>
+                  <rect x="590" y="170" width="178" height="22" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="679" y="185">Nav2 waypoint mission</text>
+                </g>
+
+                <!-- arrows -->
+                <line x1="226" y1="135" x2="282" y2="135" stroke="#5c656e" stroke-width="1.5" marker-end="url(#apf)"/>
+                <line x1="514" y1="135" x2="570" y2="135" stroke="#5c656e" stroke-width="1.5" marker-end="url(#apf)"/>
+                <text x="400" y="212" text-anchor="middle" fill="#8b949e" font-size="10">delivered as files (scp) — the robot exposes no network path-receive endpoint</text>
+                <text x="400" y="40" text-anchor="middle" fill="#8b949e" font-size="11">contract read &amp; frozen against the Forager1 source tree</text>
+                <line x1="120" y1="52" x2="120" y2="66" stroke="#3a4a54" stroke-width="1"/>
+                <line x1="679" y1="52" x2="679" y2="66" stroke="#3a4a54" stroke-width="1"/>
+                <line x1="120" y1="52" x2="679" y2="52" stroke="#3a4a54" stroke-width="1"/>
+              </svg>
+              <figcaption>
+                <b>The app and the robot meet at a contract, not a guess.</b> A drawn field becomes a
+                mission JSON + site GeoJSON in the exact schema and coordinate frame Forager1 already ingests —
+                verified by reading the robot's source before a line of delivery code was written.
+              </figcaption>
+            </figure>
+
+            <!-- App UI mockup (product image) -->
+            <figure class="shot">
+              <svg viewBox="0 0 800 470" role="img" aria-label="Pathfinder app: a drawn coverage polygon with coverage lanes, two exclusion zones, a home marker, and a mission-ready summary panel">
+                <!-- backdrop -->
+                <rect width="800" height="470" fill="#090d11"/>
+                <rect width="800" height="470" fill="url(#pf-glow)"/>
+                <defs>
+                  <radialGradient id="pf-glow" cx="26%" cy="28%" r="75%">
+                    <stop offset="0%" stop-color="#12201a" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#090d11" stop-opacity="0"/>
+                  </radialGradient>
+                  <clipPath id="pf-screen"><rect x="60" y="40" width="228" height="392" rx="20"/></clipPath>
+                  <clipPath id="pf-field"><path d="M92 132 L250 118 L272 210 L232 336 L120 344 L80 224 Z"/></clipPath>
+                </defs>
+
+                <!-- Phone frame -->
+                <rect x="48" y="28" width="252" height="416" rx="30" fill="#0d141a" stroke="#2a3138" stroke-width="1.5"/>
+                <rect x="60" y="40" width="228" height="392" rx="20" fill="#0b1216"/>
+
+                <g clip-path="url(#pf-screen)">
+                  <!-- map surface -->
+                  <rect x="60" y="72" width="228" height="300" fill="#0a1015"/>
+                  <!-- parcel grid -->
+                  <g stroke="#141c22" stroke-width="1">
+                    <line x1="60" y1="112" x2="288" y2="112"/><line x1="60" y1="162" x2="288" y2="162"/>
+                    <line x1="60" y1="212" x2="288" y2="212"/><line x1="60" y1="262" x2="288" y2="262"/>
+                    <line x1="60" y1="312" x2="288" y2="312"/>
+                    <line x1="112" y1="72" x2="112" y2="372"/><line x1="164" y1="72" x2="164" y2="372"/>
+                    <line x1="216" y1="72" x2="216" y2="372"/><line x1="264" y1="72" x2="264" y2="372"/>
+                  </g>
+
+                  <!-- coverage field -->
+                  <path d="M92 132 L250 118 L272 210 L232 336 L120 344 L80 224 Z"
+                        fill="rgba(124,176,95,.16)" stroke="#7cb05f" stroke-width="2"/>
+                  <!-- boustrophedon coverage lanes -->
+                  <g clip-path="url(#pf-field)" stroke="#7cb05f" stroke-width="1.4" opacity=".7">
+                    <line x1="80" y1="150" x2="272" y2="150"/><line x1="80" y1="172" x2="272" y2="172"/>
+                    <line x1="80" y1="194" x2="272" y2="194"/><line x1="80" y1="216" x2="272" y2="216"/>
+                    <line x1="80" y1="238" x2="272" y2="238"/><line x1="80" y1="260" x2="272" y2="260"/>
+                    <line x1="80" y1="282" x2="272" y2="282"/><line x1="80" y1="304" x2="272" y2="304"/>
+                    <line x1="80" y1="326" x2="272" y2="326"/>
+                  </g>
+                  <!-- exclusion zones -->
+                  <path d="M150 178 q18 -10 30 6 q10 18 -8 28 q-24 8 -28 -14 Z"
+                        fill="rgba(200,90,80,.22)" stroke="#c85a5a" stroke-width="1.6" stroke-dasharray="4 3"/>
+                  <circle cx="212" cy="286" r="20" fill="rgba(200,90,80,.22)" stroke="#c85a5a" stroke-width="1.6" stroke-dasharray="4 3"/>
+
+                  <!-- home marker -->
+                  <g transform="translate(104,318)">
+                    <circle r="10" fill="#0b0f13" stroke="#e9ecef" stroke-width="1.4"/>
+                    <path d="M-4 1 L0 -5 L4 1 L4 5 L-4 5 Z" fill="#e9ecef"/>
+                  </g>
+
+                  <!-- top app bar -->
+                  <rect x="60" y="40" width="228" height="32" fill="#0d141a"/>
+                  <path d="M78 56 l-6 0 M74 52 l-4 4 l4 4" stroke="#8b949e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                  <text x="174" y="60" text-anchor="middle" fill="#e9ecef" font-size="12" font-weight="600" font-family="sans-serif">New Mission</text>
+
+                  <!-- bottom action sheet -->
+                  <rect x="60" y="372" width="228" height="60" fill="#0d141a"/>
+                  <rect x="60" y="372" width="228" height="1" fill="#1c252c"/>
+                  <text x="76" y="392" fill="#8b949e" font-size="9.5" font-family="sans-serif">COVERAGE</text>
+                  <text x="76" y="406" fill="#e9ecef" font-size="12" font-weight="600" font-family="sans-serif">2.4 ha · 18 lanes</text>
+                  <rect x="184" y="384" width="90" height="34" rx="9" fill="#43713c"/>
+                  <text x="229" y="405" text-anchor="middle" fill="#eaf3e6" font-size="11" font-weight="600" font-family="sans-serif">Generate</text>
+                </g>
+
+                <!-- notch -->
+                <rect x="150" y="46" width="48" height="7" rx="3.5" fill="#05080b"/>
+
+                <!-- Mission-ready summary panel (right) -->
+                <g font-family="sans-serif">
+                  <rect x="344" y="70" width="416" height="330" rx="16" fill="#0d141a" stroke="#2a3138"/>
+                  <circle cx="372" cy="102" r="6" fill="#7cb05f"/>
+                  <text x="388" y="106" fill="#e9ecef" font-size="15" font-weight="700">Mission ready</text>
+                  <text x="744" y="106" text-anchor="end" fill="#7cb05f" font-size="11" font-weight="600">✓ contract valid</text>
+                  <line x1="344" y1="122" x2="760" y2="122" stroke="#1c252c"/>
+
+                  <!-- field rows -->
+                  <g font-size="12.5">
+                    <text x="372" y="152" fill="#8b949e">Coverage area</text><text x="732" y="152" text-anchor="end" fill="#e9ecef" font-weight="600">2.42 ha</text>
+                    <text x="372" y="184" fill="#8b949e">Coverage lanes</text><text x="732" y="184" text-anchor="end" fill="#e9ecef" font-weight="600">18 @ 0.9 m</text>
+                    <text x="372" y="216" fill="#8b949e">Exclusion zones</text><text x="732" y="216" text-anchor="end" fill="#e9ecef" font-weight="600">2</text>
+                    <text x="372" y="248" fill="#8b949e">Home / dock</text><text x="732" y="248" text-anchor="end" fill="#e9ecef" font-weight="600">set</text>
+                    <text x="372" y="280" fill="#8b949e">Coordinate frame</text><text x="732" y="280" text-anchor="end" fill="#e9ecef" font-weight="600">WGS-84 → local ENU</text>
+                    <text x="372" y="312" fill="#8b949e">Robot profile</text><text x="732" y="312" text-anchor="end" fill="#e9ecef" font-weight="600">Forager1</text>
+                  </g>
+                  <g stroke="#161e24"><line x1="372" y1="164" x2="732" y2="164"/><line x1="372" y1="196" x2="732" y2="196"/><line x1="372" y1="228" x2="732" y2="228"/><line x1="372" y1="260" x2="732" y2="260"/><line x1="372" y1="292" x2="732" y2="292"/></g>
+
+                  <!-- export chip row -->
+                  <rect x="372" y="338" width="196" height="34" rx="9" fill="#0b0f13" stroke="#43713c"/>
+                  <text x="470" y="359" text-anchor="middle" fill="#7cb05f" font-size="11.5" font-weight="600">Export → mission.json</text>
+                  <rect x="580" y="338" width="152" height="34" rx="9" fill="#0b0f13" stroke="#2a3138"/>
+                  <text x="656" y="359" text-anchor="middle" fill="#8b949e" font-size="11.5">deliver via scp</text>
+                </g>
+              </svg>
+              <figcaption>
+                <b>Draw a field, see the plan.</b> The map view lets an operator sketch a coverage polygon,
+                mark exclusion zones and a home dock, and previews the boustrophedon coverage lanes. The
+                summary panel is the mission that gets exported — in exactly the schema and frame the robot ingests.
+                <em>(Representative UI mockup.)</em>
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+
+        <!-- Engineering highlights -->
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Engineering highlights</h2>
+          <div class="highlights">
+            <div class="highlight">
+              <h4>Interface reconciliation, done right</h4>
+              <p>Rather than assume an API, I read the robot's codebase and discovered it has no network
+                 receiver — it ingests mission files at launch. The contract was frozen against that reality.</p>
+            </div>
+            <div class="highlight">
+              <h4>Robot-agnostic by design</h4>
+              <p>Delivery is per-transport adapters; planner, pattern, and coordinate frame are profile-driven.
+                 A second robot is a new profile, not a fork of the app.</p>
+            </div>
+            <div class="highlight">
+              <h4>Requirements with a Definition of Done</h4>
+              <p>A master spec ties each phase to PRD items and a testable completion condition, so "done" is
+                 defined per phase rather than felt.</p>
+            </div>
+            <div class="highlight">
+              <h4>An explicit performance budget</h4>
+              <p>Scale/perf targets SP1&ndash;SP8 pin the area ceiling, vertex/zone/waypoint limits, and
+                 generation-time budgets — turning vague "should be fast" into numbers you can test.</p>
+            </div>
+            <div class="highlight">
+              <h4>Cost-constrained from the start</h4>
+              <p>The design commits to staying within free-tier Mapbox and networking limits for the MVP, a
+                 real constraint baked into the architecture rather than discovered later.</p>
+            </div>
+            <div class="highlight">
+              <h4>Consistent design system</h4>
+              <p>A NativeWind theme mapped to the shared "Console" palette keeps the app visually of a piece
+                 with the rest of the portfolio, on both web and native builds.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Showcase: challenges overcome -->
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Showcase — challenges I overcame</h2>
+          <div class="showcase">
+
+            <div class="challenge">
+              <div class="challenge-head">
+                <span class="challenge-num">1</span>
+                <h4>The robot I was building for had no API to talk to</h4>
+              </div>
+              <dl>
+                <div class="challenge-row"><dt>Challenge</dt><dd>I assumed I'd POST a mission to Forager1 over the network. Reading the robot's source proved there <b>was no receive endpoint</b> — it only ingests mission files at ROS2 launch.</dd></div>
+                <div class="challenge-row"><dt>Approach</dt><dd>I stopped guessing and treated the robot's real launch inputs as the specification. I froze a file-based contract — <code>mission.json</code> + <code>site.geojson</code> in WGS-84 — and delivered it over scp, matching what the robot already does.</dd></div>
+                <div class="challenge-row challenge-row--win"><dt>Outcome</dt><dd>Zero glue code on the robot. Pathfinder produces artifacts Forager1 <b>already knows how to read</b>, so the two integrate without modifying the proven robot stack.</dd></div>
+              </dl>
+            </div>
+
+            <div class="challenge">
+              <div class="challenge-head">
+                <span class="challenge-num">2</span>
+                <h4>Not hard-wiring the app to a single robot</h4>
+              </div>
+              <dl>
+                <div class="challenge-row"><dt>Challenge</dt><dd>The fastest path was to bake Forager1's schema, coordinate frame, and transport straight into the screens — and be stuck the moment a second robot appeared.</dd></div>
+                <div class="challenge-row"><dt>Approach</dt><dd>I pushed everything robot-specific behind a <b>profile</b>: pattern planner, coordinate frame, and a per-transport delivery adapter. The UI only ever speaks the abstract mission model.</dd></div>
+                <div class="challenge-row challenge-row--win"><dt>Outcome</dt><dd>Supporting another robot is a config file, not a fork — the agnostic-by-design goal is structural, not aspirational.</dd></div>
+              </dl>
+            </div>
+
+            <div class="challenge">
+              <div class="challenge-head">
+                <span class="challenge-num">3</span>
+                <h4>Keeping "fast" and "cheap" testable, not vibes</h4>
+              </div>
+              <dl>
+                <div class="challenge-row"><dt>Challenge</dt><dd>Coverage math on a phone can blow up with big fields, and a naive map integration can quietly leave the free tier and start costing money.</dd></div>
+                <div class="challenge-row"><dt>Approach</dt><dd>I wrote an explicit budget — SP1&ndash;SP8 scale/perf targets capping area, vertices, zones, waypoints, and generation time — and committed the MVP to free-tier Mapbox and networking limits up front.</dd></div>
+                <div class="challenge-row challenge-row--win"><dt>Outcome</dt><dd>Performance and cost became <b>numbers I can test against</b> rather than surprises discovered in the field.</dd></div>
+              </dl>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Stack & access -->
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Stack &amp; access</h2>
+          <div class="cs-meta" style="margin-bottom:1.2rem">
+            <span class="chip">React Native</span>
+            <span class="chip">Expo</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">NativeWind</span>
+            <span class="chip">Mapbox</span>
+            <span class="chip">GeoJSON</span>
+            <span class="chip">Jest</span>
+          </div>
+          <div class="cs-note">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>Source is private to protect the design. I'm happy to walk through the interface contract or
+              the app in a conversation &mdash; just <a href="../index.html#contact">reach out</a>.</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Wesley Fletcher · <a href="../index.html#projects">Back to work &#8599;</a></p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

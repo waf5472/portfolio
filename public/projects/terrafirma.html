@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Terrafirma — a habitat-suitability platform that fuses public geospatial data into species suitability maps and ecological interaction graphs, built on a clean two-layer architecture." />
+  <title>Terrafirma — Wesley Fletcher</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../case.css" />
+</head>
+<body>
+
+  <header class="nav-wrapper" id="nav">
+    <nav class="nav container">
+      <a href="../index.html#hero" class="nav-logo">Wesley Fletcher</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="../index.html#projects">Work</a></li>
+        <li><a href="../index.html#experience">Experience</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="cs-hero reveal">
+      <div class="container">
+        <a class="cs-back" href="../index.html#projects">&larr; All work</a>
+        <p class="cs-eyebrow">Personal Project · Systems &amp; Robotics</p>
+        <h1 class="cs-title">Terrafirma</h1>
+        <p class="cs-tagline">Point it at a patch of land and get species-suitability maps — fused from real public geoscience data.</p>
+        <div class="cs-meta">
+          <span class="chip"><b>Domain</b> Geospatial / ecology</span>
+          <span class="chip"><b>Stack</b> Python · PostGIS · scikit-learn</span>
+          <span class="chip"><b>Role</b> Solo architect &amp; builder</span>
+          <span class="chip"><b>Started</b> Mar 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <!-- Summary -->
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Summary</h2>
+          <p class="cs-lede">
+            Terrafirma models where a given species is likely to thrive. It ingests soil, terrain, climate,
+            land-cover, and occurrence data from a stack of public sources, scores habitat suitability across
+            the landscape, and renders the result as map tiles alongside an <b>ecological interaction graph</b>
+            of the species around it.
+          </p>
+          <p class="cs-lede">
+            Its defining feature is architectural: a strict <b>two-layer split</b> between a species-agnostic
+            <em>data plane</em> and a species-specific <em>inference</em> layer. That seam keeps the geoscience
+            reusable across any species and the modelling logic honest and independently testable.
+          </p>
+
+          <div class="status">
+            <div class="status-top">
+              <span class="status-badge status-badge--wip">Work in progress</span>
+              <span class="status-phase">Engine complete &amp; tested · end-to-end integration in progress</span>
+            </div>
+            <div class="status-bar"><div class="status-fill status-fill--wip" style="width:70%"></div></div>
+            <div class="status-lines">
+              <div class="status-line"><b>Shipped</b><span>The YAML-driven suitability engine, map-tile rendering, a web UI, and a 484-test suite.</span></div>
+              <div class="status-line"><b>Now</b><span>Wiring the data-verification gate into the pipeline and proving the two layers end-to-end.</span></div>
+              <div class="status-line"><b>Next</b><span>Run the full pipeline on live regional data (beyond the pilot bounding box) and validate outputs.</span></div>
+            </div>
+            <div class="stat-strip">
+              <div class="stat"><b>484</b><span>passing tests</span></div>
+              <div class="stat"><b>7+</b><span>public data sources</span></div>
+              <div class="stat"><b>2-layer</b><span>data / inference split</span></div>
+              <div class="stat"><b>YAML</b><span>per-species config</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Design & system architecture -->
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Design &amp; system architecture</h2>
+          <div class="figures">
+
+            <!-- Two-layer architecture -->
+            <figure class="diagram">
+              <svg viewBox="0 0 800 360" role="img" aria-label="Terrafirma two-layer architecture: a species-agnostic data plane feeding a species-specific inference layer">
+                <defs>
+                  <marker id="atf" markerWidth="9" markerHeight="9" refX="4.5" refY="7" orient="auto">
+                    <path d="M4.5 0 L9 7 L0 7 Z" fill="#7cb05f"/>
+                  </marker>
+                </defs>
+
+                <!-- Output -->
+                <rect x="250" y="14" width="300" height="42" rx="10" fill="#0b0f13" stroke="#43713c"/>
+                <text x="400" y="40" text-anchor="middle" fill="#7cb05f" font-size="13" font-weight="600">Suitability map tiles + interaction graph</text>
+
+                <!-- Layer 2 -->
+                <rect x="36" y="80" width="728" height="118" rx="12" fill="#0d141a" stroke="#3a4a54"/>
+                <text x="52" y="102" fill="#8b949e" font-size="10.5" font-weight="700" letter-spacing="1.5">LAYER 2 · SPECIES INFERENCE</text>
+                <g font-size="11.5" fill="#e9ecef" text-anchor="middle">
+                  <rect x="52"  y="112" width="128" height="34" rx="7" fill="#0b0f13" stroke="#2a3138"/><text x="116" y="133">Terrain</text>
+                  <rect x="196" y="112" width="128" height="34" rx="7" fill="#0b0f13" stroke="#2a3138"/><text x="260" y="133">Canopy</text>
+                  <rect x="340" y="112" width="128" height="34" rx="7" fill="#0b0f13" stroke="#2a3138"/><text x="404" y="133">Host density</text>
+                  <rect x="484" y="112" width="128" height="34" rx="7" fill="#0b0f13" stroke="#2a3138"/><text x="548" y="133">Phenology</text>
+                  <rect x="628" y="112" width="128" height="34" rx="7" fill="#0b0f13" stroke="#2a3138"/><text x="692" y="133">SDM (RF)</text>
+                </g>
+                <rect x="270" y="158" width="260" height="30" rx="7" fill="#0b0f13" stroke="#43713c"/>
+                <text x="400" y="178" text-anchor="middle" fill="#7cb05f" font-size="11.5" font-weight="600">log-space geometric-mean combiner</text>
+
+                <!-- one-way arrow -->
+                <line x1="400" y1="248" x2="400" y2="204" stroke="#7cb05f" stroke-width="1.6" marker-end="url(#atf)"/>
+                <text x="414" y="230" fill="#8b949e" font-size="10">Layer 2 reads Layer 1 &mdash; never the reverse</text>
+
+                <!-- Layer 1 -->
+                <rect x="36" y="252" width="728" height="62" rx="12" fill="#0d141a" stroke="#3a4a54"/>
+                <text x="52" y="272" fill="#8b949e" font-size="10.5" font-weight="700" letter-spacing="1.5">LAYER 1 · SPECIES-AGNOSTIC DATA PLANE</text>
+                <g font-size="10.5" fill="#e9ecef" text-anchor="middle">
+                  <rect x="52"  y="280" width="108" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="106" y="297">slope</text>
+                  <rect x="170" y="280" width="108" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="224" y="297">aspect</text>
+                  <rect x="288" y="280" width="108" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="342" y="297">elevation</text>
+                  <rect x="406" y="280" width="108" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="460" y="297">TPI</text>
+                  <rect x="524" y="280" width="108" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="578" y="297">land cover</text>
+                  <rect x="642" y="280" width="114" height="26" rx="6" fill="#0b0f13" stroke="#2a3138"/><text x="699" y="297">host points</text>
+                </g>
+
+                <!-- Sources -->
+                <text x="400" y="336" text-anchor="middle" fill="#5c656e" font-size="10.5">
+                  sources: iNaturalist · SSURGO · USGS 3DEP · PRISM · GLOBI · GBIF · Mushroom Observer
+                </text>
+              </svg>
+              <figcaption>
+                <b>One seam, cleanly enforced.</b> Layer 1 serves typed, species-agnostic geodata; Layer 2
+                scores a specific species and fuses the scores. The dependency only ever points downward, so
+                adding a species never touches the data plane.
+              </figcaption>
+            </figure>
+
+            <!-- Suitability map UI mockup (product image) -->
+            <figure class="shot">
+              <svg viewBox="0 0 800 430" role="img" aria-label="Terrafirma web map with a species-suitability heatmap overlay, occurrence points, a legend, and an interaction-graph inset">
+                <defs>
+                  <clipPath id="tf-land"><path d="M40 96 C120 70 200 84 250 70 C320 50 360 96 430 88 C500 80 520 130 500 190 C486 236 512 300 470 350 C420 408 320 388 250 400 C160 416 80 392 56 330 C34 274 60 210 44 160 C36 132 30 112 40 96 Z"/></clipPath>
+                  <radialGradient id="tf-hot1" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#a8cf8a" stop-opacity=".95"/>
+                    <stop offset="35%" stop-color="#7cb05f" stop-opacity=".8"/>
+                    <stop offset="70%" stop-color="#43713c" stop-opacity=".45"/>
+                    <stop offset="100%" stop-color="#43713c" stop-opacity="0"/>
+                  </radialGradient>
+                  <radialGradient id="tf-hot2" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#7cb05f" stop-opacity=".85"/>
+                    <stop offset="55%" stop-color="#2b5230" stop-opacity=".5"/>
+                    <stop offset="100%" stop-color="#2b5230" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+
+                <!-- map viewport -->
+                <rect width="800" height="430" fill="#0a1216"/>
+                <!-- ocean grid -->
+                <g stroke="#0f1a20" stroke-width="1">
+                  <line x1="0" y1="72" x2="560" y2="72"/><line x1="0" y1="144" x2="560" y2="144"/>
+                  <line x1="0" y1="216" x2="560" y2="216"/><line x1="0" y1="288" x2="560" y2="288"/>
+                  <line x1="0" y1="360" x2="560" y2="360"/>
+                  <line x1="112" y1="0" x2="112" y2="430"/><line x1="224" y1="0" x2="224" y2="430"/>
+                  <line x1="336" y1="0" x2="336" y2="430"/><line x1="448" y1="0" x2="448" y2="430"/>
+                </g>
+
+                <!-- landmass -->
+                <path d="M40 96 C120 70 200 84 250 70 C320 50 360 96 430 88 C500 80 520 130 500 190 C486 236 512 300 470 350 C420 408 320 388 250 400 C160 416 80 392 56 330 C34 274 60 210 44 160 C36 132 30 112 40 96 Z"
+                      fill="#111c16" stroke="#2b3a2e" stroke-width="1.5"/>
+
+                <!-- suitability heatmap (clipped to land) -->
+                <g clip-path="url(#tf-land)">
+                  <rect x="40" y="60" width="480" height="360" fill="#16261a"/>
+                  <ellipse cx="200" cy="180" rx="150" ry="120" fill="url(#tf-hot1)"/>
+                  <ellipse cx="360" cy="300" rx="120" ry="95" fill="url(#tf-hot2)"/>
+                  <ellipse cx="330" cy="150" rx="70" ry="60" fill="url(#tf-hot2)"/>
+                  <!-- tile grid to convey rendered map tiles -->
+                  <g stroke="#0c130f" stroke-width="1" opacity=".5">
+                    <line x1="88" y1="60" x2="88" y2="420"/><line x1="152" y1="60" x2="152" y2="420"/>
+                    <line x1="216" y1="60" x2="216" y2="420"/><line x1="280" y1="60" x2="280" y2="420"/>
+                    <line x1="344" y1="60" x2="344" y2="420"/><line x1="408" y1="60" x2="408" y2="420"/>
+                    <line x1="472" y1="60" x2="472" y2="420"/>
+                    <line x1="40" y1="108" x2="520" y2="108"/><line x1="40" y1="172" x2="520" y2="172"/>
+                    <line x1="40" y1="236" x2="520" y2="236"/><line x1="40" y1="300" x2="520" y2="300"/>
+                    <line x1="40" y1="364" x2="520" y2="364"/>
+                  </g>
+                </g>
+
+                <!-- occurrence points -->
+                <g>
+                  <circle cx="196" cy="176" r="3.5" fill="#f0f4ec" stroke="#0a1216" stroke-width="1"/>
+                  <circle cx="232" cy="150" r="3.5" fill="#f0f4ec" stroke="#0a1216" stroke-width="1"/>
+                  <circle cx="168" cy="214" r="3.5" fill="#f0f4ec" stroke="#0a1216" stroke-width="1"/>
+                  <circle cx="352" cy="296" r="3.5" fill="#f0f4ec" stroke="#0a1216" stroke-width="1"/>
+                  <circle cx="322" cy="156" r="3.5" fill="#f0f4ec" stroke="#0a1216" stroke-width="1"/>
+                </g>
+
+                <!-- top toolbar -->
+                <rect x="0" y="0" width="800" height="40" fill="#0d141a"/>
+                <rect x="0" y="40" width="800" height="1" fill="#1c252c"/>
+                <rect x="16" y="9" width="196" height="22" rx="11" fill="#0b0f13" stroke="#2a3138"/>
+                <circle cx="30" cy="20" r="4" fill="#7cb05f"/>
+                <text x="42" y="24" fill="#e9ecef" font-size="11" font-weight="600" font-family="sans-serif" font-style="italic">Morchella americana</text>
+                <text x="200" y="24" fill="#5c656e" font-size="11" font-family="sans-serif">▾</text>
+                <text x="240" y="24" fill="#8b949e" font-size="11" font-family="sans-serif">Layer: Suitability</text>
+                <text x="392" y="24" fill="#8b949e" font-size="11" font-family="sans-serif">Hosts ✓</text>
+                <text x="470" y="24" fill="#5c656e" font-size="11" font-family="sans-serif">Occurrences ✓</text>
+
+                <!-- legend -->
+                <rect x="16" y="360" width="196" height="54" rx="10" fill="rgba(11,15,19,.82)" stroke="#2a3138"/>
+                <text x="28" y="380" fill="#8b949e" font-size="10" font-family="sans-serif">HABITAT SUITABILITY</text>
+                <g>
+                  <rect x="28" y="388" width="24" height="10" fill="#16261a"/>
+                  <rect x="52" y="388" width="24" height="10" fill="#2b5230"/>
+                  <rect x="76" y="388" width="24" height="10" fill="#43713c"/>
+                  <rect x="100" y="388" width="24" height="10" fill="#5c9147"/>
+                  <rect x="124" y="388" width="24" height="10" fill="#7cb05f"/>
+                  <rect x="148" y="388" width="24" height="10" fill="#a8cf8a"/>
+                </g>
+                <text x="28" y="410" fill="#5c656e" font-size="9" font-family="sans-serif">low</text>
+                <text x="172" y="410" text-anchor="end" fill="#5c656e" font-size="9" font-family="sans-serif">high</text>
+
+                <!-- interaction-graph inset (right) -->
+                <g font-family="sans-serif">
+                  <rect x="576" y="56" width="208" height="196" rx="12" fill="rgba(13,20,26,.94)" stroke="#2a3138"/>
+                  <text x="592" y="80" fill="#e9ecef" font-size="12" font-weight="700">Interaction graph</text>
+                  <text x="592" y="96" fill="#5c656e" font-size="9.5">GLOBI · NetworkX</text>
+                  <!-- edges -->
+                  <g stroke="#3a4a54" stroke-width="1.4">
+                    <line x1="680" y1="150" x2="620" y2="120"/><line x1="680" y1="150" x2="742" y2="118"/>
+                    <line x1="680" y1="150" x2="616" y2="196"/><line x1="680" y1="150" x2="744" y2="200"/>
+                    <line x1="680" y1="150" x2="680" y2="228"/>
+                  </g>
+                  <!-- nodes -->
+                  <circle cx="680" cy="150" r="16" fill="#43713c" stroke="#7cb05f" stroke-width="1.6"/>
+                  <text x="680" y="154" text-anchor="middle" fill="#eaf3e6" font-size="9" font-weight="600">morel</text>
+                  <circle cx="620" cy="120" r="11" fill="#0b0f13" stroke="#5b87ab" stroke-width="1.4"/><text x="620" y="123" text-anchor="middle" fill="#8fb4d6" font-size="8">ash</text>
+                  <circle cx="742" cy="118" r="11" fill="#0b0f13" stroke="#5b87ab" stroke-width="1.4"/><text x="742" y="121" text-anchor="middle" fill="#8fb4d6" font-size="8">elm</text>
+                  <circle cx="616" cy="196" r="11" fill="#0b0f13" stroke="#5b87ab" stroke-width="1.4"/><text x="616" y="199" text-anchor="middle" fill="#8fb4d6" font-size="8">apple</text>
+                  <circle cx="744" cy="200" r="11" fill="#0b0f13" stroke="#c07f43" stroke-width="1.4"/><text x="744" y="203" text-anchor="middle" fill="#d0a074" font-size="8">soil</text>
+                  <circle cx="680" cy="228" r="11" fill="#0b0f13" stroke="#c07f43" stroke-width="1.4"/><text x="680" y="231" text-anchor="middle" fill="#d0a074" font-size="8">burn</text>
+                </g>
+
+                <!-- suitability readout -->
+                <g font-family="sans-serif">
+                  <rect x="576" y="268" width="208" height="146" rx="12" fill="rgba(13,20,26,.94)" stroke="#2a3138"/>
+                  <text x="592" y="292" fill="#8b949e" font-size="10">SELECTED CELL</text>
+                  <text x="592" y="316" fill="#e9ecef" font-size="22" font-weight="700">0.81</text>
+                  <text x="632" y="316" fill="#7cb05f" font-size="11" font-weight="600">high suitability</text>
+                  <g font-size="10.5">
+                    <text x="592" y="342" fill="#8b949e">terrain</text><text x="768" y="342" text-anchor="end" fill="#e9ecef">0.88</text>
+                    <text x="592" y="362" fill="#8b949e">host density</text><text x="768" y="362" text-anchor="end" fill="#e9ecef">0.79</text>
+                    <text x="592" y="382" fill="#8b949e">phenology</text><text x="768" y="382" text-anchor="end" fill="#e9ecef">0.84</text>
+                    <text x="592" y="402" fill="#8b949e">SDM (RF)</text><text x="768" y="402" text-anchor="end" fill="#e9ecef">0.74</text>
+                  </g>
+                </g>
+              </svg>
+              <figcaption>
+                <b>Suitability, rendered as map tiles.</b> The web UI overlays per-species suitability as
+                colour-graded tiles computed on demand; an interaction-graph inset shows the species' hosts and
+                the selected cell breaks its score down by component. Pan a landscape and read where a species
+                is likely to occur. <em>(Representative UI mockup.)</em>
+              </figcaption>
+            </figure>
+
+            <!-- Config mockup (product image) -->
+            <figure class="shot">
+              <svg viewBox="0 0 800 340" role="img" aria-label="A per-species suitability configuration expressed as a YAML file, with each scoring component toggled by a flag">
+                <rect width="800" height="340" fill="#0b1015"/>
+                <!-- editor chrome -->
+                <rect x="0" y="0" width="800" height="34" fill="#0d141a"/>
+                <circle cx="20" cy="17" r="4" fill="#c85a5a"/><circle cx="36" cy="17" r="4" fill="#c07f43"/><circle cx="52" cy="17" r="4" fill="#7cb05f"/>
+                <rect x="84" y="6" width="150" height="28" rx="6" fill="#0b1015"/>
+                <text x="100" y="24" fill="#e9ecef" font-size="11.5" font-family="monospace">morel.yaml</text>
+                <text x="252" y="24" fill="#5c656e" font-size="11.5" font-family="monospace">species/morchella_americana/</text>
+
+                <!-- gutter -->
+                <rect x="0" y="34" width="40" height="306" fill="#0a0e12"/>
+                <g fill="#3a4a54" font-size="11" font-family="monospace" text-anchor="end">
+                  <text x="30" y="60">1</text><text x="30" y="80">2</text><text x="30" y="100">3</text><text x="30" y="120">4</text>
+                  <text x="30" y="140">5</text><text x="30" y="160">6</text><text x="30" y="180">7</text><text x="30" y="200">8</text>
+                  <text x="30" y="220">9</text><text x="30" y="240">10</text><text x="30" y="260">11</text><text x="30" y="280">12</text>
+                  <text x="30" y="300">13</text><text x="30" y="320">14</text>
+                </g>
+
+                <!-- code -->
+                <g font-family="monospace" font-size="12.5">
+                  <text x="52" y="60"><tspan fill="#7cb05f">name</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#d0a074">Morchella americana</tspan></text>
+                  <text x="52" y="80"><tspan fill="#7cb05f">common</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#d0a074">yellow morel</tspan></text>
+                  <text x="52" y="100" fill="#4a5560"># each block below is one scoring component</text>
+                  <text x="52" y="120"><tspan fill="#7cb05f">terrain</tspan><tspan fill="#5c656e">:</tspan></text>
+                  <text x="76" y="140"><tspan fill="#7cb05f">enabled</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#5b87ab">true</tspan><tspan fill="#5c656e">      </tspan><tspan fill="#7cb05f">weight</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#5b87ab">0.30</tspan></text>
+                  <text x="76" y="160"><tspan fill="#7cb05f">slope_deg</tspan><tspan fill="#5c656e">: [</tspan><tspan fill="#5b87ab">2</tspan><tspan fill="#5c656e">, </tspan><tspan fill="#5b87ab">14</tspan><tspan fill="#5c656e">]   </tspan><tspan fill="#7cb05f">aspect</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#d0a074">S-SW</tspan></text>
+                  <text x="52" y="180"><tspan fill="#7cb05f">host_density</tspan><tspan fill="#5c656e">:</tspan></text>
+                  <text x="76" y="200"><tspan fill="#7cb05f">enabled</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#5b87ab">true</tspan><tspan fill="#5c656e">      </tspan><tspan fill="#7cb05f">weight</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#5b87ab">0.30</tspan></text>
+                  <text x="76" y="220"><tspan fill="#7cb05f">hosts</tspan><tspan fill="#5c656e">: [</tspan><tspan fill="#d0a074">ash</tspan><tspan fill="#5c656e">, </tspan><tspan fill="#d0a074">elm</tspan><tspan fill="#5c656e">, </tspan><tspan fill="#d0a074">apple</tspan><tspan fill="#5c656e">]</tspan></text>
+                  <text x="52" y="240"><tspan fill="#7cb05f">phenology</tspan><tspan fill="#5c656e">:</tspan></text>
+                  <text x="76" y="260"><tspan fill="#7cb05f">enabled</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#5b87ab">true</tspan><tspan fill="#5c656e">      </tspan><tspan fill="#7cb05f">gdd_base_c</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#5b87ab">4</tspan></text>
+                  <text x="52" y="280"><tspan fill="#7cb05f">sdm</tspan><tspan fill="#5c656e">:</tspan>            <tspan fill="#4a5560"># RandomForest, pseudo-absence</tspan></text>
+                  <text x="76" y="300"><tspan fill="#7cb05f">enabled</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#c07f43">false</tspan><tspan fill="#5c656e">     </tspan><tspan fill="#7cb05f">weight</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#5b87ab">0.10</tspan></text>
+                  <text x="52" y="320"><tspan fill="#7cb05f">combiner</tspan><tspan fill="#5c656e">:</tspan> <tspan fill="#d0a074">log_geometric_mean</tspan></text>
+                </g>
+
+                <!-- component toggle rail (right) -->
+                <rect x="600" y="120" width="184" height="200" rx="10" fill="#0d141a" stroke="#1c252c"/>
+                <text x="616" y="142" fill="#8b949e" font-size="10" font-family="sans-serif">COMPONENTS</text>
+                <g font-family="sans-serif" font-size="11">
+                  <text x="616" y="168" fill="#e9ecef">Terrain</text>
+                  <rect x="742" y="159" width="26" height="14" rx="7" fill="#43713c"/><circle cx="761" cy="166" r="5" fill="#eaf3e6"/>
+                  <text x="616" y="196" fill="#e9ecef">Host density</text>
+                  <rect x="742" y="187" width="26" height="14" rx="7" fill="#43713c"/><circle cx="761" cy="194" r="5" fill="#eaf3e6"/>
+                  <text x="616" y="224" fill="#e9ecef">Phenology</text>
+                  <rect x="742" y="215" width="26" height="14" rx="7" fill="#43713c"/><circle cx="761" cy="222" r="5" fill="#eaf3e6"/>
+                  <text x="616" y="252" fill="#8b949e">SDM (RF)</text>
+                  <rect x="742" y="243" width="26" height="14" rx="7" fill="#2a3138"/><circle cx="749" cy="250" r="5" fill="#5c656e"/>
+                  <line x1="616" y1="272" x2="768" y2="272" stroke="#1c252c"/>
+                  <text x="616" y="294" fill="#8b949e">Combiner</text>
+                  <text x="768" y="294" text-anchor="end" fill="#7cb05f" font-weight="600">geo-mean</text>
+                  <text x="616" y="312" fill="#5c656e" font-size="9.5">behaviour is data, not code</text>
+                </g>
+              </svg>
+              <figcaption>
+                <b>Every species is a config, not code.</b> Terrain bands, host trees, phenology windows, and
+                model weights are declared in a YAML file; each scoring component toggles on or off with a
+                single flag without touching the engine. <em>(Representative config mockup.)</em>
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+
+        <!-- Engineering highlights -->
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Engineering highlights</h2>
+          <div class="highlights">
+            <div class="highlight">
+              <h4>Two-layer architecture</h4>
+              <p>A species-agnostic data plane and a species-inference layer, joined by a one-way dependency
+                 verified by sweep — the reusable core stays clean as species accumulate.</p>
+            </div>
+            <div class="highlight">
+              <h4>Real geoscience, integrated</h4>
+              <p>Seven-plus public sources — iNaturalist, SSURGO soils, USGS 3DEP elevation, PRISM climate,
+                 GLOBI interactions, GBIF, Mushroom Observer — normalised into typed providers.</p>
+            </div>
+            <div class="highlight">
+              <h4>Declarative, per-species configs</h4>
+              <p>A single parser validates the whole species file; components are enable/disable-able by one
+                 YAML flag, so behaviour is data, not branching code.</p>
+            </div>
+            <div class="highlight">
+              <h4>Real modelling under the hood</h4>
+              <p>A per-species RandomForest species-distribution model with pseudo-absence sampling, plus a
+                 NetworkX ecological interaction graph built from GLOBI.</p>
+            </div>
+            <div class="highlight">
+              <h4>484 tests &amp; a "verify data first" gate</h4>
+              <p>The suitability engine went from zero to 484 tests; a data-verification job checks that raster
+                 layers are present and physically plausible before anything scores.</p>
+            </div>
+            <div class="highlight">
+              <h4>Documentation that resists rot</h4>
+              <p>A single source-of-truth codebase map, layered by volatility (stable intent vs. dated current
+                 state) — with an honest, dated verification readout rather than aspirational claims.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Showcase: challenges overcome -->
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Showcase — challenges I overcame</h2>
+          <div class="showcase">
+
+            <div class="challenge">
+              <div class="challenge-head">
+                <span class="challenge-num">1</span>
+                <h4>Keeping the geoscience reusable across any species</h4>
+              </div>
+              <dl>
+                <div class="challenge-row"><dt>Challenge</dt><dd>The naive build entangles "what a morel likes" with "how to read a soil raster." Every new species would then re-touch the data code, and the whole thing rots into a tangle.</dd></div>
+                <div class="challenge-row"><dt>Approach</dt><dd>I enforced a strict <b>two-layer split</b>: a species-agnostic data plane that serves typed geodata, and a species-inference layer that scores and fuses. The dependency points one way only — and I <b>verify that seam by sweep</b>, so a violation is caught mechanically.</dd></div>
+                <div class="challenge-row challenge-row--win"><dt>Outcome</dt><dd>Adding a species <b>never touches the data plane</b>. The reusable core stays clean no matter how many species pile on top.</dd></div>
+              </dl>
+            </div>
+
+            <div class="challenge">
+              <div class="challenge-head">
+                <span class="challenge-num">2</span>
+                <h4>Fusing seven messy public datasets into one honest surface</h4>
+              </div>
+              <dl>
+                <div class="challenge-row"><dt>Challenge</dt><dd>iNaturalist, SSURGO soils, USGS 3DEP, PRISM, GLOBI, GBIF, and Mushroom Observer disagree on projection, resolution, units, and completeness — and a suitability map built on a silently-broken layer looks perfectly plausible while being wrong.</dd></div>
+                <div class="challenge-row"><dt>Approach</dt><dd>I normalised each source into a typed provider, then added a <b>"verify data first" gate</b> that checks rasters are present and physically plausible before anything scores — and combined component scores in log-space with a geometric mean so no single layer can dominate.</dd></div>
+                <div class="challenge-row challenge-row--win"><dt>Outcome</dt><dd>Bad inputs fail loudly at the gate instead of quietly poisoning the map, and the fused score stays balanced across components.</dd></div>
+              </dl>
+            </div>
+
+            <div class="challenge">
+              <div class="challenge-head">
+                <span class="challenge-num">3</span>
+                <h4>Proving the model instead of just claiming it</h4>
+              </div>
+              <dl>
+                <div class="challenge-row"><dt>Challenge</dt><dd>Modelling code is easy to hand-wave. Without tests, a subtle regression in scoring or phenology hides for months, and documentation drifts into aspirational fiction.</dd></div>
+                <div class="challenge-row"><dt>Approach</dt><dd>I drove the suitability engine from zero to <b>484 tests</b>, added a real RandomForest SDM with pseudo-absence sampling, and kept a single source-of-truth codebase map layered by volatility — with a dated, <b>honest verification readout</b> rather than claims.</dd></div>
+                <div class="challenge-row challenge-row--win"><dt>Outcome</dt><dd>The engine is regression-guarded and the docs tell you what's actually true <b>as of a date</b> — the project can be trusted, not just demoed.</dd></div>
+              </dl>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Stack & access -->
+        <div class="section-card cs-block reveal">
+          <h2 class="cs-h2">Stack &amp; access</h2>
+          <div class="cs-meta" style="margin-bottom:1.2rem">
+            <span class="chip">Python</span>
+            <span class="chip">FastAPI</span>
+            <span class="chip">PostGIS</span>
+            <span class="chip">scikit-learn</span>
+            <span class="chip">rio-tiler</span>
+            <span class="chip">NetworkX</span>
+            <span class="chip">Leaflet</span>
+            <span class="chip">Docker</span>
+          </div>
+          <div class="cs-note">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>Source is private to protect the design. I'm happy to walk through the architecture or the
+              modelling approach in a conversation &mdash; just <a href="../index.html#contact">reach out</a>.</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Wesley Fletcher · <a href="../index.html#projects">Back to work &#8599;</a></p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
